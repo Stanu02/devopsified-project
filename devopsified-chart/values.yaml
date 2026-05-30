@@ -1,0 +1,31 @@
+replicaCount: 1
+
+image:
+  repository: srjtanu/devopsified-app
+  tag: latest
+  pullPolicy: Always
+
+service:
+  type: ClusterIP
+  port: 5001
+
+ingress:
+  enabled: false
+
+autoscaling:
+  enabled: false
+
+httpRoute:
+  enabled: false
+
+livenessProbe:
+  httpGet:
+    path: /
+    port: 5001
+
+readinessProbe:
+  httpGet:
+    path: /
+    port: 5001
+
+resources: {}
