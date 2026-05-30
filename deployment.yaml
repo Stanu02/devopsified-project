@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: devopsified-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: devopsified-app
+  template:
+    metadata:
+      labels:
+        app: devopsified-app
+    spec:
+      containers:
+      - name: devopsified-app
+        image: srjtanu/devopsified-app:latest
+        ports:
+        - containerPort: 5000
