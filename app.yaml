@@ -1,0 +1,25 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: devopsified-app
+  namespace: argocd
+  annotations:
+    argocd-image-updater.argoproj.io/image-list: app=srjtanu/devopsified-app
+    argocd-image-updater.argoproj.io/write-back-method: git
+    argocd-image-updater.argoproj.io/app.update-strategy: latest
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/Stanu02/devopsified-project.git
+    targetRevision: main
+    path: devopsified-chart
+    helm:
+      valueFiles:
+        - values.yaml
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
